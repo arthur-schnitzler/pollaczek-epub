@@ -26,32 +26,37 @@
                         <xsl:attribute name="class">
                             <xsl:text>toc-list</xsl:text>
                         </xsl:attribute>
-                        <xsl:for-each
-                            select="collection(concat($folderURI, '/?select=ckp*.xhtml;recurse=yes'))">
+                        <xsl:for-each-group
+                            select="collection(concat($folderURI, '/?select=ckp*.xhtml;recurse=yes'))"
+                            group-by="//xhtml:title/text()">
                             <xsl:sort
                                 select="foo:extractNumericPart(//xhtml:meta[@name = 'id']/@content)"
                                 order="ascending"/>
-                            <xsl:variable name="currentTitle" select="//xhtml:title/text()"/>
-                            <!-- Check if the current title is not equal to the title of the preceding li element -->
-                            <xsl:if
-                                test="not(//xhtml:title/text() = preceding-sibling::li[1]//xhtml:title/text())">
-                                <xsl:element name="li" namespace="http://www.w3.org/1999/xhtml">
-                                    <xsl:element name="a" namespace="http://www.w3.org/1999/xhtml">
-                                        <xsl:attribute name="href">
-                                            <xsl:value-of
-                                                select="concat(//xhtml:meta[@name = 'id']/@content, '.xhtml')"
-                                            />
-                                        </xsl:attribute>
-                                        <xsl:element name="span"
+                            <xsl:variable name="currentTitle" select="current-grouping-key()"/>
+
+                            <xsl:for-each select="current-group()">
+                                <xsl:if test="position() = 1">
+                                    <!-- Only output for the first item in the group -->
+                                    <xsl:element name="li" namespace="http://www.w3.org/1999/xhtml">
+                                        <xsl:element name="a"
                                             namespace="http://www.w3.org/1999/xhtml">
-                                            <xsl:attribute name="class">title</xsl:attribute>
-                                            <xsl:value-of select="$currentTitle"/>
+                                            <xsl:attribute name="href">
+                                                <xsl:value-of
+                                                  select="concat(//xhtml:meta[@name = 'id']/@content, '.xhtml')"
+                                                />
+                                            </xsl:attribute>
+                                            <xsl:element name="span"
+                                                namespace="http://www.w3.org/1999/xhtml">
+                                                <xsl:attribute name="class">title</xsl:attribute>
+                                                <xsl:value-of select="$currentTitle"/>
+                                            </xsl:element>
                                         </xsl:element>
                                     </xsl:element>
-                                </xsl:element>
-                                <xsl:text>&#10;</xsl:text>
-                            </xsl:if>
-                        </xsl:for-each>
+                                    <xsl:text>&#10;</xsl:text>
+                                </xsl:if>
+                            </xsl:for-each>
+                        </xsl:for-each-group>
+
                     </xsl:element>
                 </xsl:element>
             </xsl:element>
