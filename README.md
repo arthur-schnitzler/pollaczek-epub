@@ -2,9 +2,7 @@
 
 ## GitHub-Action
 
-The GitHub-Action "Create EPUB" fetches data from https://github.com/arthur-schnitzler/pollaczek-data/tree/main/data/editions and transforms the XML files to XHTML.
-
-With these XHTML files it produces an E-Book. 
+The GitHub-Action "Create EPUB" fetches data from https://github.com/arthur-schnitzler/pollaczek-data/tree/main/data/editions and transforms the XML files to XHTML. With these XHTML files it produces an E-Book. 
 
 Everything here is to be understood as a work in progress. For more information see https://pollaczek.acdh.oeaw.ac.at/.
 
