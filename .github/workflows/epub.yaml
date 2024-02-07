@@ -6,6 +6,9 @@ jobs:
     build_pages:
         name: Create Epub
         runs-on: ubuntu-latest
+        permissions:
+          # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
+          contents: write
         env:
             ANT_OPTS: -Xmx6g
         steps:
