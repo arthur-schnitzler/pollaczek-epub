@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="create-tocs">
+
+    <!-- data directories -->
+    <property name="contentDir" value="./OEBPS"/>
+    <property name="textDir" value="./OEBPS/texts"/>
+
+    <!-- temporary directories -->
+    <property name="contentTmp" value="./OEBPS/contentTmp"/>
+    <delete dir="${contentTmp}"/>
+    <mkdir dir="${contentTmp}"/>
+
+    <property name="inhaltTmp" value="./OEBPS/texts/inhaltTmp"/>
+    <delete dir="${inhaltTmp}"/>
+    <mkdir dir="${inhaltTmp}"/>
+
+    <property name="inhaltsverzeichnisTmp" value="./OEBPS/inhaltsverzeichnisTmp"/>
+    <delete dir="${inhaltsverzeichnisTmp}"/>
+    <mkdir dir="${inhaltsverzeichnisTmp}"/>
+
+    <property name="titelTmp" value="./OEBPS/texts/titelTmp"/>
+    <delete dir="${titelTmp}"/>
+    <mkdir dir="${titelTmp}"/>
+
+    <property name="toc-yearsTmp" value="./OEBPS/texts/toc-yearsTmp"/>
+    <delete dir="${toc-yearsTmp}"/>
+    <mkdir dir="${toc-yearsTmp}"/>
+
+    <!-- transform OEBPS/content.opf with create-content.xsl -->
+    <xslt style="./xslt/create-content.xsl" destdir="${contentTmp}" basedir="${contentDir}"
+        includes="content.opf" extension=".opf">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="./saxon/saxon-he-11.6.jar"/>
+    </xslt>
+    <move todir="${contentDir}">
+        <fileset dir="${contentTmp}"/>
+    </move>
+    <delete dir="${contentTmp}"/>
+
+    <!-- transform OEBPS/texts/inhaltsverzeichnis.ncx with create-inhaltsverzeichnis-1.xsl -->
+    <xslt style="./xslt/create-inhaltsverzeichnis-1.xsl" destdir="${inhaltsverzeichnisTmp}"
+        basedir="${contentDir}" includes="inhaltsverzeichnis.ncx" extension=".ncx">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="./saxon/saxon-he-11.6.jar"/>
+    </xslt>
+    <move todir="${contentDir}">
+        <fileset dir="${inhaltsverzeichnisTmp}"/>
+    </move>
+    <delete dir="${inhaltsverzeichnisTmp}"/>
+    <mkdir dir="${inhaltsverzeichnisTmp}"/>
+    
+    <!-- transform OEBPS/texts/inhaltsverzeichnis.ncx with create-inhaltsverzeichnis-2.xsl -->
+    <xslt style="./xslt/create-inhaltsverzeichnis-2.xsl" destdir="${inhaltsverzeichnisTmp}"
+        basedir="${contentDir}" includes="inhaltsverzeichnis.ncx" extension=".ncx">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="./saxon/saxon-he-11.6.jar"/>
+    </xslt>
+    <move todir="${contentDir}">
+        <fileset dir="${inhaltsverzeichnisTmp}"/>
+    </move>
+    <delete dir="${inhaltsverzeichnisTmp}"/>
+
+    <!-- transform OEBPS/texts/titel.xhtml with create-titel.xsl -->
+    <xslt style="./xslt/create-titel.xsl" destdir="${titelTmp}" basedir="${textDir}"
+        includes="titel.xhtml" extension=".xhtml">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="./saxon/saxon-he-11.6.jar"/>
+    </xslt>
+    <move todir="${textDir}">
+        <fileset dir="${titelTmp}"/>
+    </move>
+    <delete dir="${titelTmp}"/>
+
+    <!-- transform OEBPS/texts/toc-years.xhtml with create-toc-years-1.xsl -->
+    <xslt style="./xslt/create-toc-years-1.xsl" destdir="${toc-yearsTmp}" basedir="${textDir}"
+        includes="toc-years.xhtml" extension=".xhtml">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="./saxon/saxon-he-11.6.jar"/>
+    </xslt>
+    <move todir="${textDir}">
+        <fileset dir="${toc-yearsTmp}"/>
+    </move>
+    <delete dir="${toc-yearsTmp}"/>
+    <mkdir dir="${toc-yearsTmp}"/>
+
+    <!-- transform OEBPS/texts/toc-years.xhtml with create-toc-years-2.xsl -->
+    <xslt style="./xslt/create-toc-years-2.xsl" destdir="${toc-yearsTmp}" basedir="${textDir}"
+        includes="toc-years.xhtml" extension=".xhtml">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="./saxon/saxon-he-11.6.jar"/>
+    </xslt>
+    <move todir="${textDir}">
+        <fileset dir="${toc-yearsTmp}"/>
+    </move>
+    <delete dir="${toc-yearsTmp}"/>
+    
+    <!-- transform OEBPS/texts/inhalt.xhtml with create-inhalt.xsl -->
+    <xslt style="./xslt/create-inhalt.xsl" destdir="${inhaltTmp}" basedir="${textDir}"
+        includes="inhalt.xhtml" extension=".xhtml">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="./saxon/saxon-he-11.6.jar"/>
+    </xslt>
+    <move todir="${textDir}">
+        <fileset dir="${inhaltTmp}"/>
+    </move>
+    <delete dir="${inhaltTmp}"/>
+
+</project>
