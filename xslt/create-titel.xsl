@@ -12,31 +12,31 @@
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
             <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-                <title>Arthur Schnitzler: Briefwechsel mit Autorinnen und Autoren</title>
-                <meta name="author" content="Schnitzler, Arthur"/>
+                <title>Clara Katharina Pollaczek: Arthur Schnitzler und ich</title>
+                <meta name="author" content="Pollaczek, Clara Katharina"/>
                 <meta name="language" content="de"/>
                 <meta name="description"
-                    content="Berufliche Korrespondenzen von Arthur Schnitzler (1862–1931) mit Autorinnen und Autoren."/>
+                    content="Clara Katharina Pollaczeks Erinnerungen an Arthur Schnitzler"/>
                 <meta name="editor" content="Müller, Martin Anton"/>
-                <meta name="editor" content="Susen, Gerd-Hermann"/>
                 <meta name="editor" content="Untner, Laura"/>
-                <meta name="DC.Title"
-                    content="Arthur Schnitzler: Briefwechsel mit Autorinnen und Autoren"/>
+                <meta name="editor" content="Mangel, Michael"/>
+                <meta name="editor" content="Andorfer, Peter"/>
+                <meta name="DC.Title" content="Clara Katharina Pollaczek: Arthur Schnitzler und ich"/>
                 <meta name="DC.Type" content="Text"/>
                 <meta name="DC.Format" content="text/html"/>
             </head>
             <body>
                 <div>
-                    <h1>Arthur Schnitzler</h1>
-                    <h1>Briefwechsel mit Autorinnen und Autoren (1888–1931)</h1>
+                    <h1>Clara Katharina Pollaczek</h1>
+                    <h1>Arthur Schnitzler und ich</h1>
                 </div>
                 <div>
-                    <p>Herausgegeben von Martin Anton Müller, Gerd-Hermann Susen und Laura
-                        Untner</p>
+                    <p>Herausgegeben von Martin Anton Müller, Laura Untner, Michael Mangel und Peter
+                        Andorfer</p>
                 </div>
                 <div>
-                    <p>E-Book basierend auf <a href="https://schnitzler-briefe.acdh.oeaw.ac.at/"
-                            >https://schnitzler-briefe.acdh.oeaw.ac.at/</a>.</p>
+                    <p>E-Book basierend auf <a href="https://pollaczek.acdh.oeaw.ac.at/"
+                            >https://pollaczek.acdh.oeaw.ac.at/</a>.</p>
                     <xsl:variable name="currentDate" select="current-date()"/>
                     <p>Stand: <xsl:value-of select="foo:format-date-german($currentDate)"/>.</p>
                 </div>

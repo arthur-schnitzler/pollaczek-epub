@@ -29,7 +29,7 @@
                         <xsl:text>dtb:uid</xsl:text>
                     </xsl:attribute>
                     <xsl:attribute name="content">
-                        <xsl:text>asbw-epub</xsl:text>
+                        <xsl:text>pollaczek-epub</xsl:text>
                     </xsl:attribute>
                 </xsl:element>
                 <xsl:element name="meta" namespace="http://www.daisy.org/z3986/2005/ncx/">
@@ -51,7 +51,7 @@
             </xsl:element>
             <xsl:element name="docTitle" namespace="http://www.daisy.org/z3986/2005/ncx/">
                 <xsl:element name="text" namespace="http://www.daisy.org/z3986/2005/ncx/">
-                    <xsl:text>Arthur Schnitzler: Briefwechsel mit Autorinnen und Autoren</xsl:text>
+                    <xsl:text>Clara Katharina Pollaczek: Arthur Schnitzler und ich</xsl:text>
                 </xsl:element>
             </xsl:element>
             <xsl:element name="docAuthor" namespace="http://www.daisy.org/z3986/2005/ncx/">
@@ -61,12 +61,17 @@
             </xsl:element>
             <xsl:element name="docAuthor" namespace="http://www.daisy.org/z3986/2005/ncx/">
                 <xsl:element name="text" namespace="http://www.daisy.org/z3986/2005/ncx/">
-                    <xsl:text>Susen, Gerd-Hermann</xsl:text>
+                    <xsl:text>Untner, Laura</xsl:text>
                 </xsl:element>
             </xsl:element>
             <xsl:element name="docAuthor" namespace="http://www.daisy.org/z3986/2005/ncx/">
                 <xsl:element name="text" namespace="http://www.daisy.org/z3986/2005/ncx/">
-                    <xsl:text>Untner, Laura</xsl:text>
+                    <xsl:text>Mangel, Michael</xsl:text>
+                </xsl:element>
+            </xsl:element>
+            <xsl:element name="docAuthor" namespace="http://www.daisy.org/z3986/2005/ncx/">
+                <xsl:element name="text" namespace="http://www.daisy.org/z3986/2005/ncx/">
+                    <xsl:text>Andorfer, Peter</xsl:text>
                 </xsl:element>
             </xsl:element>
             <xsl:element name="navMap" namespace="http://www.daisy.org/z3986/2005/ncx/">
@@ -144,25 +149,24 @@
                 </xsl:element>
                 <xsl:element name="navPoint" namespace="http://www.daisy.org/z3986/2005/ncx/">
                     <xsl:attribute name="id">
-                        <xsl:text>toc-years</xsl:text>
+                        <xsl:text>toc</xsl:text>
                     </xsl:attribute>
                     <xsl:attribute name="playOrder">
                         <xsl:text>5</xsl:text>
                     </xsl:attribute>
                     <xsl:element name="navLabel" namespace="http://www.daisy.org/z3986/2005/ncx/">
                         <xsl:element name="text" namespace="http://www.daisy.org/z3986/2005/ncx/">
-                            <xsl:text>Korrespondenzstücke nach Jahren</xsl:text>
+                            <xsl:text>Inhaltsverzeichnis</xsl:text>
                         </xsl:element>
                     </xsl:element>
                     <xsl:element name="content" namespace="http://www.daisy.org/z3986/2005/ncx/">
                         <xsl:attribute name="src">
-                            <xsl:text>texts/toc-years.xhtml</xsl:text>
+                            <xsl:text>inhalt.xhtml</xsl:text>
                         </xsl:attribute>
                     </xsl:element>
                 </xsl:element>
-                <xsl:copy-of select="ncx:navPoint[@id = 'toc']"/>
                 <xsl:for-each
-                    select="collection(concat($folderURI, '/?select=L0*.xhtml;recurse=yes'))">
+                    select="collection(concat($folderURI, '/?select=ckp*.xhtml;recurse=yes'))">
                     <xsl:sort select="//xhtml:meta[@name = 'date']/@content" order="ascending"/>
                     <xsl:sort select="//xhtml:meta[@name = 'n']/@content" order="ascending"/>
                     <xsl:element name="navPoint" namespace="http://www.daisy.org/z3986/2005/ncx/">
@@ -182,29 +186,12 @@
                         <xsl:element name="content" namespace="http://www.daisy.org/z3986/2005/ncx/">
                             <xsl:attribute name="src">
                                 <xsl:value-of
-                                    select="concat('texts/', //xhtml:meta[@name = 'id']/@content, '.xhtml')"/>
+                                    select="concat('texts/', //xhtml:meta[@name = 'id']/@content, '.xhtml')"
+                                />
                             </xsl:attribute>
                         </xsl:element>
                     </xsl:element>
                 </xsl:for-each>
-                <xsl:element name="navPoint" namespace="http://www.daisy.org/z3986/2005/ncx/">
-                    <xsl:attribute name="id">
-                        <xsl:text>toc</xsl:text>
-                    </xsl:attribute>
-                    <xsl:attribute name="playOrder">
-                        <xsl:text>0</xsl:text>
-                    </xsl:attribute>
-                    <xsl:element name="navLabel" namespace="http://www.daisy.org/z3986/2005/ncx/">
-                        <xsl:element name="text" namespace="http://www.daisy.org/z3986/2005/ncx/">
-                            <xsl:text>Alle Korrespondenzstücke</xsl:text>
-                        </xsl:element>
-                    </xsl:element>
-                    <xsl:element name="content" namespace="http://www.daisy.org/z3986/2005/ncx/">
-                        <xsl:attribute name="src">
-                            <xsl:text>inhalt.xhtml</xsl:text>
-                        </xsl:attribute>
-                    </xsl:element>
-                </xsl:element>
             </xsl:element>
         </xsl:element>
     </xsl:template>

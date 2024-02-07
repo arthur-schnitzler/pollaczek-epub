@@ -11,7 +11,7 @@
 
     <!-- transform edition files with editions-to-xhtml-for-epub.xsl -->
     <xslt style="./xslt/editions-to-xhtml-for-epub.xsl" destdir="${tmpDir}" basedir="${editions}"
-        includes="L0*.xml" extension=".xml">
+        includes="ckp*.xml" extension=".xml">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="./saxon/saxon-he-11.6.jar"/>
     </xslt>

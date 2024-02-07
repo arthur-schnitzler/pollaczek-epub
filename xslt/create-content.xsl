@@ -15,26 +15,29 @@
                 <xsl:text>2.0</xsl:text>
             </xsl:attribute>
             <xsl:attribute name="unique-identifier">
-                <xsl:text>asbw-epub</xsl:text>
+                <xsl:text>pollaczek-epub</xsl:text>
             </xsl:attribute>
             <xsl:element name="metadata" namespace="http://www.idpf.org/2007/opf">
                 <xsl:element name="identifier" namespace="http://purl.org/dc/elements/1.1/">
                     <xsl:attribute name="id">
-                        <xsl:text>asbw-epub</xsl:text>
+                        <xsl:text>pollaczek-epub</xsl:text>
                     </xsl:attribute>
-                    <xsl:text>asbw-epub</xsl:text>
+                    <xsl:text>pollaczek-epub</xsl:text>
                 </xsl:element>
                 <xsl:element name="title" namespace="http://purl.org/dc/elements/1.1/">
-                    <xsl:text>Arthur Schnitzler: Briefwechsel mit Autorinnen und Autoren</xsl:text>
+                    <xsl:text>Clara Katharina Pollaczek: Arthur Schnitzler und ich</xsl:text>
                 </xsl:element>
                 <xsl:element name="creator" namespace="http://purl.org/dc/elements/1.1/">
                     <xsl:text>Müller, Martin Anton</xsl:text>
                 </xsl:element>
                 <xsl:element name="creator" namespace="http://purl.org/dc/elements/1.1/">
-                    <xsl:text>Susen, Gerd-Hermann</xsl:text>
+                    <xsl:text>Untner, Laura</xsl:text>
                 </xsl:element>
                 <xsl:element name="creator" namespace="http://purl.org/dc/elements/1.1/">
-                    <xsl:text>Untner, Laura</xsl:text>
+                    <xsl:text>Mangel, Michael</xsl:text>
+                </xsl:element>
+                <xsl:element name="creator" namespace="http://purl.org/dc/elements/1.1/">
+                    <xsl:text>Andorfer, Peter</xsl:text>
                 </xsl:element>
                 <xsl:element name="publisher" namespace="http://purl.org/dc/elements/1.1/">
                     <xsl:text>Austrian Centre for Digital Humanities and Cultural Heritage at the Austrian Academy of Sciences</xsl:text>
@@ -46,7 +49,7 @@
                     <xsl:text>2023</xsl:text>
                 </xsl:element>
                 <xsl:element name="subject" namespace="http://purl.org/dc/elements/1.1/">
-                    <xsl:text>Arthur Schnitzler’s literary correspondences</xsl:text>
+                    <xsl:text>Clara Katharina Pollaczek’s memoirs</xsl:text>
                 </xsl:element>
             </xsl:element>
             <xsl:element name="manifest" namespace="http://www.idpf.org/2007/opf">
@@ -107,16 +110,16 @@
                 </xsl:element>
                 <xsl:element name="item" namespace="http://www.idpf.org/2007/opf">
                     <xsl:attribute name="id">
-                        <xsl:text>toc-years</xsl:text>
+                        <xsl:text>inhalt</xsl:text>
                     </xsl:attribute>
                     <xsl:attribute name="href">
-                        <xsl:text>texts/toc-years.xhtml</xsl:text>
+                        <xsl:text>texts/inhalt.xhtml</xsl:text>
                     </xsl:attribute>
                     <xsl:attribute name="media-type">
                         <xsl:text>application/xhtml+xml</xsl:text>
                     </xsl:attribute>
                 </xsl:element>
-                <xsl:for-each select="collection('../OEBPS/texts/?select=L0*.xhtml;recurse=yes')">
+                <xsl:for-each select="collection('../OEBPS/texts/?select=ckp*.xhtml;recurse=yes')">
                     <xsl:sort select="//xhtml:meta[@name = 'date']/@content" order="ascending"/>
                     <xsl:sort select="//xhtml:meta[@name = 'n']/@content" order="ascending"/>
                     <xsl:element name="item" namespace="http://www.idpf.org/2007/opf">
@@ -133,17 +136,6 @@
                         </xsl:attribute>
                     </xsl:element>
                 </xsl:for-each>
-                <xsl:element name="item" namespace="http://www.idpf.org/2007/opf">
-                    <xsl:attribute name="id">
-                        <xsl:text>inhalt</xsl:text>
-                    </xsl:attribute>
-                    <xsl:attribute name="href">
-                        <xsl:text>texts/inhalt.xhtml</xsl:text>
-                    </xsl:attribute>
-                    <xsl:attribute name="media-type">
-                        <xsl:text>application/xhtml+xml</xsl:text>
-                    </xsl:attribute>
-                </xsl:element>
                 <xsl:element name="item" namespace="http://www.idpf.org/2007/opf">
                     <xsl:attribute name="id">
                         <xsl:text>css</xsl:text>
@@ -196,10 +188,10 @@
                 </xsl:element>
                 <xsl:element name="itemref" namespace="http://www.idpf.org/2007/opf">
                     <xsl:attribute name="idref">
-                        <xsl:text>toc-years</xsl:text>
+                        <xsl:text>inhalt</xsl:text>
                     </xsl:attribute>
                 </xsl:element>
-                <xsl:for-each select="collection('../OEBPS/texts/?select=L0*.xhtml;recurse=yes')">
+                <xsl:for-each select="collection('../OEBPS/texts/?select=ckp*.xhtml;recurse=yes')">
                     <xsl:sort select="//xhtml:meta[@name = 'date']/@content" order="ascending"/>
                     <xsl:sort select="//xhtml:meta[@name = 'n']/@content" order="ascending"/>
                     <xsl:element name="itemref" namespace="http://www.idpf.org/2007/opf">
@@ -208,11 +200,6 @@
                         </xsl:attribute>
                     </xsl:element>
                 </xsl:for-each>
-                <xsl:element name="itemref" namespace="http://www.idpf.org/2007/opf">
-                    <xsl:attribute name="idref">
-                        <xsl:text>inhalt</xsl:text>
-                    </xsl:attribute>
-                </xsl:element>
             </xsl:element>
             <xsl:element name="guide" namespace="http://www.idpf.org/2007/opf">
                 <xsl:element name="reference" namespace="http://www.idpf.org/2007/opf">
