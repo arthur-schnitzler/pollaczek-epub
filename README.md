@@ -1,4 +1,4 @@
-# EPUB for pollaczek
+# EPUB for Clara Katharina Pollaczek’s »Arthur Schnitzler und ich«
 
 ## GitHub-Action
 
