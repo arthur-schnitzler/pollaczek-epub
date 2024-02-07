@@ -2,8 +2,9 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions"
     xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:opf="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/"
-    version="3.0" exclude-result-prefixes="tei xhtml opf">
+    xmlns:opf="http://www.idpf.org/2007/opf" xmlns:foo="whatever"
+    xmlns:dc="http://purl.org/dc/elements/1.1/" version="3.0"
+    exclude-result-prefixes="tei xhtml opf">
 
     <xsl:output method="xml" omit-xml-declaration="yes" indent="yes"/>
 
@@ -120,8 +121,8 @@
                     </xsl:attribute>
                 </xsl:element>
                 <xsl:for-each select="collection('../OEBPS/texts/?select=ckp*.xhtml;recurse=yes')">
-                    <xsl:sort select="//xhtml:meta[@name = 'date']/@content" order="ascending"/>
-                    <xsl:sort select="//xhtml:meta[@name = 'n']/@content" order="ascending"/>
+                    <xsl:sort select="foo:extractNumericPart(//xhtml:meta[@name = 'id']/@content)"
+                        order="ascending"/>
                     <xsl:element name="item" namespace="http://www.idpf.org/2007/opf">
                         <xsl:attribute name="id">
                             <xsl:value-of select="//xhtml:meta[@name = 'id']/@content"/>
@@ -192,8 +193,8 @@
                     </xsl:attribute>
                 </xsl:element>
                 <xsl:for-each select="collection('../OEBPS/texts/?select=ckp*.xhtml;recurse=yes')">
-                    <xsl:sort select="//xhtml:meta[@name = 'date']/@content" order="ascending"/>
-                    <xsl:sort select="//xhtml:meta[@name = 'n']/@content" order="ascending"/>
+                    <xsl:sort select="foo:extractNumericPart(//xhtml:meta[@name = 'id']/@content)"
+                        order="ascending"/>
                     <xsl:element name="itemref" namespace="http://www.idpf.org/2007/opf">
                         <xsl:attribute name="idref">
                             <xsl:value-of select="//xhtml:meta[@name = 'id']/@content"/>
@@ -227,4 +228,11 @@
             </xsl:element>
         </xsl:element>
     </xsl:template>
+
+    <xsl:function name="foo:extractNumericPart" as="xs:integer">
+        <xsl:param name="input" as="xs:string"/>
+        <xsl:variable name="numericPart" select="substring-after($input, 'ckp')"/>
+        <xsl:sequence select="xs:integer($numericPart)"/>
+    </xsl:function>
+
 </xsl:stylesheet>

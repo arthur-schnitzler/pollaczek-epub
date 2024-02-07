@@ -2,7 +2,6 @@
 
 To Do
 
-- Code anpassen
 - Readme überarbeiten
 - YAML/GitHub-Action
 - Einbindung in Webseite (analog zu schnitzler-briefe)

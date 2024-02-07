@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions"
-    xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" version="3.0"
-    exclude-result-prefixes="tei xhtml">
+    xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:foo="whatever"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml" version="3.0" exclude-result-prefixes="tei xhtml">
 
     <xsl:output method="xhtml" indent="yes"/>
 
@@ -14,23 +14,22 @@
         <xsl:element name="html" namespace="http://www.w3.org/1999/xhtml">
             <xsl:element name="head" namespace="http://www.w3.org/1999/xhtml">
                 <xsl:element name="title" namespace="http://www.w3.org/1999/xhtml">
-                    <xsl:text>Alle Korrespondenzstücke</xsl:text>
+                    <xsl:text>Inhaltsverzeichnis</xsl:text>
                 </xsl:element>
             </xsl:element>
             <xsl:element name="body" namespace="http://www.w3.org/1999/xhtml">
                 <xsl:element name="div" namespace="http://www.w3.org/1999/xhtml">
                     <xsl:element name="h1" namespace="http://www.w3.org/1999/xhtml">
-                        <xsl:text>Alle Korrespondenzstücke</xsl:text>
+                        <xsl:text>Inhaltsverzeichnis</xsl:text>
                     </xsl:element>
                     <xsl:element name="ul" namespace="http://www.w3.org/1999/xhtml">
                         <xsl:attribute name="class">
                             <xsl:text>toc-list</xsl:text>
                         </xsl:attribute>
                         <xsl:for-each
-                            select="collection(concat($folderURI, '/?select=L0*.xhtml;recurse=yes'))">
-                            <xsl:sort select="//xhtml:meta[@name = 'date']/@content"
+                            select="collection(concat($folderURI, '/?select=ckp*.xhtml;recurse=yes'))">
+                            <xsl:sort select="foo:extractNumericPart(//xhtml:meta[@name = 'id']/@content)"
                                 order="ascending"/>
-                            <xsl:sort select="//xhtml:meta[@name = 'n']/@content" order="ascending"/>
                             <xsl:element name="li" namespace="http://www.w3.org/1999/xhtml">
                                 <xsl:element name="a" namespace="http://www.w3.org/1999/xhtml">
                                     <xsl:attribute name="href">
@@ -54,5 +53,11 @@
             </xsl:element>
         </xsl:element>
     </xsl:template>
+    
+    <xsl:function name="foo:extractNumericPart" as="xs:integer">
+        <xsl:param name="input" as="xs:string"/>
+        <xsl:variable name="numericPart" select="substring-after($input, 'ckp')"/>
+        <xsl:sequence select="xs:integer($numericPart)"/>
+    </xsl:function>
 
 </xsl:stylesheet>

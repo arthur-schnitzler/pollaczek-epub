@@ -11,7 +11,6 @@
     <xsl:template match="/">
         <html xmlns="http://www.w3.org/1999/xhtml">
             <head>
-                <!-- XXXX Sortierung für create-content -->
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
                 <title>
                     <xsl:copy-of select="//tei:titleStmt/tei:title[@level = 'a']/text()"/>
@@ -29,46 +28,15 @@
                         <xsl:text>date</xsl:text>
                     </xsl:attribute>
                     <xsl:attribute name="content">
-                        <xsl:if test="//tei:correspAction[@type = 'sent']//tei:date/@when">
-                            <xsl:value-of
-                                select="//tei:correspAction[@type = 'sent']//tei:date/@when"/>
-                        </xsl:if>
-                        <xsl:if test="//tei:correspAction[@type = 'sent']//tei:date/@notBefore">
-                            <xsl:value-of
-                                select="//tei:correspAction[@type = 'sent']//tei:date/@notBefore"/>
-                        </xsl:if>
-                        <xsl:if test="//tei:correspAction[@type = 'sent']//tei:date/@from">
-                            <xsl:value-of
-                                select="//tei:correspAction[@type = 'sent']//tei:date/@from"/>
-                        </xsl:if>
-                        <xsl:if
-                            test="//tei:correspAction[@type = 'sent']//tei:date[not(@notBefore)]/@notAfter">
-                            <xsl:value-of
-                                select="//tei:correspAction[@type = 'sent']//tei:date[not(@notBefore)]/@notAfter"
-                            />
-                        </xsl:if>
-                        <xsl:if
-                            test="//tei:correspAction[@type = 'sent']//tei:date[not(@from)]/@to">
-                            <xsl:value-of
-                                select="//tei:correspAction[@type = 'sent']//tei:date[not(@from)]/@to"
-                            />
-                        </xsl:if>
+                        <xsl:value-of
+                            select="//tei:titleStmt/tei:title[@type = 'alternative']/@when-iso"/>
                     </xsl:attribute>
                 </meta>
-                <meta>
-                    <xsl:attribute name="name">
-                        <xsl:text>n</xsl:text>
-                    </xsl:attribute>
-                    <xsl:attribute name="content">
-                        <xsl:value-of select="//tei:correspAction[@type = 'sent']//tei:date/@n"/>
-                    </xsl:attribute>
-                </meta>
-                <meta name="series"
-                    content="Arthur Schnitzlers Briefwechsel mit Autorinnen und Autoren"/>
-                <meta name="author" content="Schnitzler, Arthur"/>
+                <meta name="author" content="Pollaczek, Clara Katharina"/>
                 <meta name="editor" content="Müller, Martin Anton"/>
-                <meta name="editor" content="Susen, Gerd-Hermann"/>
                 <meta name="editor" content="Untner, Laura"/>
+                <meta name="editor" content="Mangel, Michael"/>
+                <meta name="editor" content="Andorfer, Peter"/>
                 <meta name="publisher"
                     content="Austrian Centre for Digital Humanities and Cultural Heritage (ACDH-CH)"/>
                 <link rel="stylesheet" type="text/css" href="../styles/stylesheet.css"/>
@@ -88,14 +56,14 @@
                     <xsl:apply-templates select="//tei:body"/>
                 </div>
                 <!-- Fußnoten -->
-                <xsl:if test="//tei:note[@type = 'footnote']">
+                <!--<xsl:if test="//tei:note[@type = 'footnote']">
                     <div class="footnote smaller-font">
                         <xsl:apply-templates select="//tei:note[@type = 'footnote']" mode="footnote"
                         />
                     </div>
-                </xsl:if>
+                </xsl:if>-->
                 <!-- Kommentar -->
-                <xsl:if test="//tei:note[@type = 'commentary' or @type = 'textConst']">
+                <!--<xsl:if test="//tei:note[@type = 'commentary' or @type = 'textConst']">
                     <div class="kommentar smaller-font">
                         <br/>
                         <h4>Kommentar</h4>
@@ -103,9 +71,9 @@
                             select="//tei:note[@type = 'textConst' or @type = 'commentary']"
                             mode="kommentaranhang"/>
                     </div>
-                </xsl:if>
+                </xsl:if>-->
                 <!-- nicht explizit erwähnte Entitäten -->
-                <xsl:variable name="back"
+                <!--<xsl:variable name="back"
                     select="descendant::tei:*[ancestor-or-self::tei:back[1]] except tei:person[tei:persName/tei:surname[fn:starts-with(., '??')]]"/>
                 <xsl:variable name="rs-not-implied">
                     <xsl:element name="list" namespace="http://www.tei-c.org/ns/1.0">
@@ -235,9 +203,9 @@
                             </div>
                         </div>
                     </xsl:if>
-                </xsl:if>
+                </xsl:if>-->
                 <!-- correspDesc -->
-                <div class="correspDesc smaller-font">
+                <!--<div class="correspDesc smaller-font">
                     <h4>Versandweg</h4>
                     <dl class="correspDesc">
                         <xsl:for-each select="descendant::tei:correspAction">
@@ -293,9 +261,9 @@
                             </dd>
                         </xsl:for-each>
                     </dl>
-                </div>
+                </div>-->
                 <!-- msDesc -->
-                <xsl:if test="descendant::tei:listWit">
+                <!--<xsl:if test="descendant::tei:listWit">
                     <div class="msDesc smaller-font">
                         <h4>Manuskriptbeschreibung</h4>
                         <xsl:apply-templates select="//tei:listWit"/>
@@ -338,64 +306,7 @@
                             </p>
                         </xsl:for-each>
                     </div>
-                </xsl:if>
-                <!--<h4>Blättern</h4>
-                        <!-\- voriger Brief -\->
-                        <xsl:if test="$correspContext/tei:ref/@subtype = 'previous_letter'">
-                            <div class="previous-letter">
-                                <ul>
-                                    <xsl:if
-                                        test="$correspContext/tei:ref[@type = 'withinCollection' and @subtype = 'previous_letter'][1]">
-                                        <span>Vorheriger Brief in chronologischer
-                                            Reihenfolge:</span>
-                                        <xsl:for-each
-                                            select="$correspContext/tei:ref[@type = 'withinCollection' and @subtype = 'previous_letter']">
-                                            <xsl:call-template name="mam:nav-li-item">
-                                                <xsl:with-param name="eintrag" select="."/>
-                                                <xsl:with-param name="direction" select="'prev-doc'"
-                                                />
-                                            </xsl:call-template>
-                                        </xsl:for-each>
-                                    </xsl:if>
-                                    <xsl:if
-                                        test="$correspContext/tei:ref[@type = 'withinCorrespondence' and @subtype = 'previous_letter'][1]">
-                                        <span>Vorheriger Brief in der Korrespondenz:</span>
-                                        
-                                    </xsl:if>
-                                </ul>
-                            </div>
-                        </xsl:if>
-                        <!-\- nächster Brief -\->
-                        <xsl:if test="$correspContext/tei:ref/@subtype = 'next_letter'">
-                            <div class="next-letter">
-                                <ul>
-                                    <xsl:if
-                                        test="$correspContext/tei:ref[@type = 'withinCollection' and @subtype = 'next_letter'][1]">
-                                        <span>Nächster Brief in chronologischer Reihenfolge:</span>
-                                        <xsl:for-each
-                                            select="$correspContext/tei:ref[@type = 'withinCollection' and @subtype = 'next_letter']">
-                                            <xsl:call-template name="mam:nav-li-item">
-                                                <xsl:with-param name="eintrag" select="."/>
-                                                <xsl:with-param name="direction" select="'next-doc'"
-                                                />
-                                            </xsl:call-template>
-                                        </xsl:for-each>
-                                    </xsl:if>
-                                    <xsl:if
-                                        test="$correspContext/tei:ref[@type = 'withinCorrespondence' and @subtype = 'next_letter'][1]">
-                                        <span>Nächster Brief in der Korrespondenz:</span>
-                                        <xsl:for-each
-                                            select="$correspContext/tei:ref[@type = 'withinCorrespondence' and @subtype = 'next_letter']">
-                                            <xsl:call-template name="mam:nav-li-item">
-                                                <xsl:with-param name="eintrag" select="."/>
-                                                <xsl:with-param name="direction"
-                                                  select="'next-doc2'"/>
-                                            </xsl:call-template>
-                                        </xsl:for-each>
-                                    </xsl:if>
-                                </ul>
-                            </div>
-                        </xsl:if>-->
+                </xsl:if>-->
             </body>
         </html>
     </xsl:template>

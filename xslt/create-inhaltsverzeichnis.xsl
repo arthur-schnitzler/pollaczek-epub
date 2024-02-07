@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions"
-    xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:foo="whatever" xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:ncx="http://www.daisy.org/z3986/2005/ncx/" version="3.0"
     exclude-result-prefixes="tei xhtml ncx">
 
@@ -167,8 +167,8 @@
                 </xsl:element>
                 <xsl:for-each
                     select="collection(concat($folderURI, '/?select=ckp*.xhtml;recurse=yes'))">
-                    <xsl:sort select="//xhtml:meta[@name = 'date']/@content" order="ascending"/>
-                    <xsl:sort select="//xhtml:meta[@name = 'n']/@content" order="ascending"/>
+                    <xsl:sort select="foo:extractNumericPart(//xhtml:meta[@name = 'id']/@content)"
+                        order="ascending"/>
                     <xsl:element name="navPoint" namespace="http://www.daisy.org/z3986/2005/ncx/">
                         <xsl:attribute name="id">
                             <xsl:value-of select="//xhtml:meta[@name = 'id']/@content"/>
@@ -195,5 +195,11 @@
             </xsl:element>
         </xsl:element>
     </xsl:template>
+
+    <xsl:function name="foo:extractNumericPart" as="xs:integer">
+        <xsl:param name="input" as="xs:string"/>
+        <xsl:variable name="numericPart" select="substring-after($input, 'ckp')"/>
+        <xsl:sequence select="xs:integer($numericPart)"/>
+    </xsl:function>
 
 </xsl:stylesheet>
