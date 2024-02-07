@@ -1,11 +1,5 @@
 # EPUB for pollaczek
 
-To Do
-
-- Readme überarbeiten
-- Einbindung in Webseite (analog zu schnitzler-briefe)
-
-
 ## GitHub-Action
 
 The GitHub-Action "Create EPUB" fetches data from https://github.com/arthur-schnitzler/pollaczek-data/tree/main/data/editions and transforms the XML files to XHTML.
@@ -40,10 +34,10 @@ ant -f create-tocs.xml
 ```
 - Create the EPUB by running
 ```
-zip -rX out/schnitzler-briefe.epub mimetype META-INF/ OEBPS/ -x "*.DS_Store" -x "README.md" -x "epubcheck.jar" -x "lib" -x "out" -x "obsolete" -x "xslt" -x ".gitignore" -x ".git" -x ".github" -x "fetch-data.sh" -x "remove-empty-namespace-declarations.py" -x "remove-tei-files.py" -x "shellscripts" -x "editions-to-epub.xml" -x "create-tocs.xml" -x "LICENSE"
+zip -rX out/pollaczek.epub mimetype META-INF/ OEBPS/ -x "*.DS_Store" -x "README.md" -x "epubcheck.jar" -x "lib" -x "out" -x "obsolete" -x "xslt" -x ".gitignore" -x ".git" -x ".github" -x "fetch-data.sh" -x "remove-empty-namespace-declarations.py" -x "remove-tei-files.py" -x "shellscripts" -x "editions-to-epub.xml" -x "create-tocs.xml" -x "LICENSE"
 ```
 - Optionally: Validate the EPUB by running
 ```
-java -jar epubcheck.jar out/schnitzler-briefe.epub
+java -jar epubcheck.jar out/pollaczek.epub
 ```
 - Commit and push
