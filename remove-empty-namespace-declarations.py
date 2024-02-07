@@ -7,7 +7,7 @@ def parse_xhtml_files(directory):
     corrected_files = []  # List to store the names of the corrected files
     
     for filename in os.listdir(directory):
-        if filename.startswith("L0") and filename.endswith(".xhtml"):
+        if filename.startswith("ckp") and filename.endswith(".xhtml"):
             xhtml_files_found = True  # Set the flag to True
             filepath = os.path.join(directory, filename)
             
