@@ -11,11 +11,14 @@ Reproduce the workflow defined here: https://github.com/arthur-schnitzler/pollac
 
 … means:
 
-- Install Saxon by running
+- If you don’t have Saxon installed, run:
 ```
 sh shellscripts/dl_saxon.sh
 ```
-- Download/Pull edition files from https://github.com/arthur-schnitzler/arthur-schnitzler-arbeit/tree/main/editions and save them to a subdirectory named editions
+- Download/Pull edition files from https://github.com/arthur-schnitzler/arthur-schnitzler-arbeit/tree/main/editions and save them to a subdirectory named editions or run:
+```
+sh fetch-data.sh
+```
 - Transform the edition files and rename the suffixes of the edition files to .xhtml by running
 ```
 ant -f editions-to-epub.xml
