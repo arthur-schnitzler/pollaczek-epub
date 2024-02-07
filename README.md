@@ -6,7 +6,7 @@ The GitHub-Action "Create EPUB" fetches data from https://github.com/arthur-schn
 
 With these XHTML files it produces an E-Book. 
 
-Everything here is to be understood as a work in progress. For more information see https://pollaczek.acdh.oeaw.ac.at/ (esp. »Editionsrichtlinien«).
+Everything here is to be understood as a work in progress. For more information see https://pollaczek.acdh.oeaw.ac.at/.
 
 ## If working manually
 Reproduce the workflow defined here: https://github.com/arthur-schnitzler/pollaczek-epub/blob/main/.github/workflows/epub.yaml
